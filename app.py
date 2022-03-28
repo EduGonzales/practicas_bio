@@ -1,6 +1,6 @@
 import json
 from flask import Flask, request,Response
-from flask_pymongo import PyMongo
+#from flask_pymongo import PyMongo
 from bson import json_util
 from flask_mongoengine import MongoEngine
 from mongoengine import ReferenceField, ListField
@@ -13,7 +13,7 @@ app.config['MONGO_URI']='mongodb://localhost/'
 client = MongoClient()
 #name of the database on mongodb
 mydb = client["practicas"]
-mongo=PyMongo(app)
+#mongo=PyMongo(app)
 dbs = MongoEngine()
 #name of the colection inside of the database("practicas") on mongodb
 mycol = mydb["taxons"]
