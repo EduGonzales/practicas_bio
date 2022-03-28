@@ -1,5 +1,5 @@
 # practicas_bio
-Primero debemos instalar anaconda(https://www.anaconda.com/) en linux.
+  1. Primero debemos instalar anaconda(https://www.anaconda.com/) en linux.
 Ejecutamos el sh y despues creamos un entorno virtual : conda install -n nombredelentorno -c anaconda python .
 Nota : Si quisiera una version de python en especifico : python=3.9 .
 Para acceder al entorno creado : conda activate nombredelentorno .
