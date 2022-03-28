@@ -1,9 +1,9 @@
 # practicas_bio
 1.  Primero debemos instalar anaconda(https://www.anaconda.com/) en Linux.
-2.  Ejecutamos el sh y después creamos un entorno virtual: conda install -n nombredelentorno -c anaconda python.
+2.  Ejecutamos el sh y después creamos un entorno virtual: conda install -n nombre_del_entorno -c anaconda python.
 3.  Nota: Si quisiera una versión de python en específico : python=3.9.
-4.  Para acceder al entorno creado: conda activate nombredelentorno.
-5.  Para salir del entorno: conda deactivate nombredelentorno.
+4.  Para acceder al entorno creado: conda activate nombre_del_entorno.
+5.  Para salir del entorno: conda deactivate nombre_del_entorno.
 6.  Ahora, una vez en el entorno, instalaremos:
 7.  Ahora instalaremos Flask mediante anaconda(https://anaconda.org/anaconda/flask): conda install -c anaconda flask.
 8.  Recomendación: instalar pip en anaconda: https://anaconda.org/anaconda/pip: conda install -c anaconda pip.
