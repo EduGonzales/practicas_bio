@@ -6,7 +6,7 @@ from flask_mongoengine import MongoEngine
 from mongoengine import ReferenceField, ListField
 from pymongo import MongoClient
 import gridfs
-
+from bson.objectid import ObjectId
 #--------------------------------------------------------------------------------------
 app= Flask(__name__)
 app.config['MONGO_URI']='mongodb://localhost/'
@@ -51,6 +51,16 @@ def find_taxon_by(taxid):
 
     taxons=mycol.find_one({"taxid":taxid})
     response=json_util.dumps(taxons)
+    if response == "null":
+        info={
+                "taxid":"","name":"","file":[{
+                    "name": "",
+                    "type": "",
+                    "file": ""
+                }]}
+        response=json_util.dumps(info)
+        return Response(response,mimetype="application/json") 
+
     return Response(response,mimetype="application/json") 
 
 
@@ -81,7 +91,14 @@ def upload_file():
                  "file": file_name
              }]}]
          )
-    return  "upload succesful!"
+    info={
+              "taxid":taxon['taxid'],"name":taxon['name'],"file":[{
+                 "name": name_file,
+                 "type": type_file,
+                 "file": file_name
+             }]}
+    response=json_util.dumps(info)
+    return  response
 
 #--------------------------------------------------------------------------------------
 @app.route("/files/<id>")
@@ -89,14 +106,18 @@ def download_file(id):
     """This function will be download the file by file name"""
 
     data=myfiles.find_one({"filename":id})
-    my_id=data["_id"]
-    fs=gridfs.GridFS(mydb)
-    outputdata=fs.get(my_id).read()
-    download_location="/home/edu/Desktop/descargas_mongodb/" +id
-    output=open(download_location,"wb")
-    output.write(outputdata)
-    output.close()
-    return "Download succesful!"
+    print(data)
+    if data ==None:
+        return "No se encontro ninguno"
+    else:
+        my_id=data["_id"]
+        fs=gridfs.GridFS(mydb)
+        outputdata=fs.get(my_id).read()
+        download_location="/home/edu/Desktop/descargas_mongodb/" +id
+        output=open(download_location,"wb")
+        output.write(outputdata)
+        output.close()
+        return "Download succesful!"
 
 
 #--------------------------------------------------------------------------------------
@@ -105,6 +126,8 @@ def delete_all():
     """This function will be delete all info of the db"""
 
     x = mycol.delete_many({})
+
+    return "deleted"
 
 
 
